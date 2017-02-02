@@ -2,42 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://desile.github.io/2015/05/new-post/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
+    <loc>https://desile.github.io/2017/02/hello-world/</loc>
+    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://desile.github.io/categories/</loc>
+    <loc>https://desile.github.io/tags/blog/</loc>
+    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://desile.github.io/categories/category/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
+    <loc>https://desile.github.io/tags/hugo/</loc>
+    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://desile.github.io/post/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://desile.github.io/categories/subcategory/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://desile.github.io/tags/tag1/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://desile.github.io/tags/tag2/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -48,7 +31,7 @@
   
   <url>
     <loc>https://desile.github.io/</loc>
-    <lastmod>2015-05-28T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,598 @@
+
+
+  
+    
+  
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.18.1">
+    <title>Hello, World!</title>
+    <meta name="author" content="Павел Городецкий">
+    <meta name="keywords" content="tech">
+
+    <link rel="icon" href="https://desile.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="Очень мне понравилась идея статических генераторов - прямо таки web 1.0 ver 2.
+Я выбрал генератор Hugo и замечательный темплейт Tranquilpeak.
+Самый заметный профит, пожалуй, в том, что не нужно заботиться о хостинге (а иногда и платить за него) и сталкиваться с малоприятным PHP. Да и работает статика пошустрее динамики. Писать в markdown лично мне приятнее, чем в редакторах движков. С правками темплейта и постов тоже все отлично - Hugo позволяет запустить локальный сервер, который будет следить за изменениями контента, и сразу же их отображать.">
+    <meta property="og:description" content="Очень мне понравилась идея статических генераторов - прямо таки web 1.0 ver 2.
+Я выбрал генератор Hugo и замечательный темплейт Tranquilpeak.
+Самый заметный профит, пожалуй, в том, что не нужно заботиться о хостинге (а иногда и платить за него) и сталкиваться с малоприятным PHP. Да и работает статика пошустрее динамики. Писать в markdown лично мне приятнее, чем в редакторах движков. С правками темплейта и постов тоже все отлично - Hugo позволяет запустить локальный сервер, который будет следить за изменениями контента, и сразу же их отображать.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Hello, World!">
+    <meta property="og:url" content="/2017/02/hello-world/">
+    <meta property="og:site_name" content="Не очень личный блог">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Не очень личный блог">
+    <meta name="twitter:description" content="Очень мне понравилась идея статических генераторов - прямо таки web 1.0 ver 2.
+Я выбрал генератор Hugo и замечательный темплейт Tranquilpeak.
+Самый заметный профит, пожалуй, в том, что не нужно заботиться о хостинге (а иногда и платить за него) и сталкиваться с малоприятным PHP. Да и работает статика пошустрее динамики. Писать в markdown лично мне приятнее, чем в редакторах движков. С правками темплейта и постов тоже все отлично - Hugo позволяет запустить локальный сервер, который будет следить за изменениями контента, и сразу же их отображать.">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://desile.github.io/images/ilita.png">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="https://desile.github.io/css/style-kwq31uljmwb2ricn1rp3ntof5vj473cvnd8fndghmcq7wq2j2gz4mbuxx9fz.min.css" />
+    
+
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?139"></script>
+
+    <script type="text/javascript">
+      VK.init({apiId: 5853579, onlyWidgets: true});
+    </script>
+    
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://desile.github.io/">Не очень личный блог</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://desile.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://desile.github.io/images/ilita.png" alt="Авторская фотография" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://desile.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://desile.github.io/images/ilita.png" alt="Авторская фотография" />
+        </a>
+        <h4 class="sidebar-profile-name">Павел Городецкий</h4>
+        
+          <h5 class="sidebar-profile-bio">Этот текст написан исчезающей краской.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://desile.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Главная</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://desile.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Разделы</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://desile.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Теги</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://desile.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Архив</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://desile.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">Об авторе</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/desile" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/dsile" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://desile.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Hello, World!
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  <time itemprop="datePublished" datetime="2017-02-02T00:00:00Z">
+    
+  
+  
+  
+  
+    2 Февраль 2017
+  
+
+  </time>
+  
+
+</div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Очень мне понравилась идея статических генераторов - прямо таки web 1.0 ver 2.</p>
+
+<p>Я выбрал генератор <a href="https://gohugo.io/">Hugo</a> и замечательный темплейт <a href="https://github.com/kakawait/hugo-tranquilpeak-theme">Tranquilpeak</a>.</p>
+
+<p>Самый заметный профит, пожалуй, в том, что не нужно заботиться о хостинге (а иногда и платить за него) и сталкиваться с малоприятным <a href="http://lurkmore.to/PHP">PHP</a>. Да и работает статика пошустрее динамики. Писать в <a href="https://guides.github.com/features/mastering-markdown/">markdown</a> лично мне приятнее, чем в редакторах движков. С правками темплейта и постов тоже все отлично - Hugo позволяет запустить локальный сервер, который будет следить за изменениями контента, и сразу же их отображать.</p>
+
+<p>Ну и главное, что сайт можно просто повесить на GitHub ( ͡° ͜ʖ ͡°)</p>
+
+<!-- more /-->
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">Теги: </span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/blog/">Blog</a>
+
+  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/hugo/">Hugo</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">Пред.</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/tags/blog/" data-tooltip="Blog">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">След.</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+              
+                <div id="vk_comments"></div>
+<style>
+    #vk_comments, #vk_comments iframe {
+        width: 100% !important;
+    }
+</style>
+<script type="text/javascript">
+VK.Widgets.Comments("vk_comments", {limit: 20, width: "600" , attach: false});
+</script>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2017 Павел Городецкий. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">Пред.</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/tags/blog/" data-tooltip="Blog">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">След.</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+        <i class="fa fa-google-plus"></i><span>Поделиться в Google Plus</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+        <i class="fa fa-facebook-official"></i><span>Поделиться в Facebook</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fhello-world%2f">
+        <i class="fa fa-twitter"></i><span>Поделиться в Twitter</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://desile.github.io/images/ilita.png" alt="Авторская фотография" />
+    
+    <h4 id="about-card-name">Павел Городецкий</h4>
+    
+      <div id="about-card-bio"><pre>       /\       
+      /  \      
+     /,--.\     
+    /&lt; () &gt;\    
+   /  `--'  \   
+  /          \  
+ /   fnord?   \ 
+/______________\
+
+hjm
+</pre></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Java-разработчик
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Эдем
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Поиск" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">Статей не найдено</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://desile.github.io/2017/02/hello-world/">
+                <h3 class="media-heading">Hello, World!</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Очень мне понравилась идея статических генераторов - прямо таки web 1.0 ver 2.
+Я выбрал генератор Hugo и замечательный темплейт Tranquilpeak.
+Самый заметный профит, пожалуй, в том, что не нужно заботиться о хостинге (а иногда и платить за него) и сталкиваться с малоприятным PHP. Да и работает статика пошустрее динамики. Писать в markdown лично мне приятнее, чем в редакторах движков. С правками темплейта и постов тоже все отлично - Hugo позволяет запустить локальный сервер, который будет следить за изменениями контента, и сразу же их отображать.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="Статей не найдено"
+         data-message-one="Найдена 1 статья"
+         data-message-other="Статей найдено: {n}">
+         1 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://desile.github.io/images/artsfon.com-1492.jpg');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="https://desile.github.io/js/script-vvjmudnngcfxu91fglnqiqo9vnsheub2tki7u8hlk2yv0qfwvcvalqkkfzxr.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/desile.github.io\/2017\/02\/hello-world\/';
+          
+            this.page.identifier = '\/2017\/02\/hello-world\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'not-very-personal';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+    
+  </body>
+</html>
+
