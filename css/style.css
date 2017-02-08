@@ -2181,6 +2181,8 @@ a.fancybox {
       max-width: 100%; }
   .postShorten .postShorten-excerpt {
     margin-top: 15px; }
+    .postShorten .postShorten-excerpt p {
+      margin-bottom: 20px; }
   .postShorten .postShorten-content {
     margin-top: 25px; }
 
@@ -2220,8 +2222,6 @@ a.fancybox {
   .postShorten.postShorten--thumbnailimg-bottom .postShorten-wrap {
     display: block;
     width: 100%; }
-  .postShorten.postShorten--thumbnailimg-bottom .postShorten-excerpt > p {
-    margin-bottom: 0; }
   .postShorten.postShorten--thumbnailimg-bottom .postShorten-thumbnailimg {
     display: block;
     width: 100%;
