@@ -1,0 +1,72 @@
+<style>
+  *{
+    margin: 0;  
+  }
+
+  html, body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #renderCanvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  #stats {
+      position: absolute;
+      right: 20px;
+      top: 60px;
+      font-size: 25px;
+      color: white;
+      text-align: right;
+      text-shadow: 2px 2px 0 black;
+  }
+
+  #middle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 40%;
+    width: 600px;
+  }
+
+  #gameOver {
+    visibility: hidden;
+    border: dotted red 2px;
+    background-color: gray;
+  }
+
+  #gameOverMessage {
+    color: white;
+    font-size: 80px;
+    text-align: center;
+  }
+
+  #tryAgainMessage {
+    color: white;
+    font-size: 35px;
+    text-align: center;
+    border: dotted white 2px;
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+
+  #fps {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 20px;
+    color: white;
+    text-shadow: 2px 2px 0 black;
+  }
+
+</style>

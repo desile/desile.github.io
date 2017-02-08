@@ -14,9 +14,7 @@
       <pubDate>Thu, 02 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>https://desile.github.io/2017/02/hello-world/</guid>
-      <description>&lt;p&gt;Очень мне понравилась идея статических генераторов - прямо таки web 1.0 ver 2.&lt;/p&gt;
-
-&lt;p&gt;Я выбрал генератор &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; и замечательный темплейт &lt;a href=&#34;https://github.com/kakawait/hugo-tranquilpeak-theme&#34;&gt;Tranquilpeak&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;Поднял новый блог на статическом генераторе &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Самый заметный профит, пожалуй, в том, что не нужно заботиться о хостинге (а иногда и платить за него) и сталкиваться с малоприятным &lt;a href=&#34;http://lurkmore.to/PHP&#34;&gt;PHP&lt;/a&gt;. Да и работает статика пошустрее динамики. Писать в &lt;a href=&#34;https://guides.github.com/features/mastering-markdown/&#34;&gt;markdown&lt;/a&gt; лично мне приятнее, чем в редакторах движков. С правками темплейта и постов тоже все отлично - Hugo позволяет запустить локальный сервер, который будет следить за изменениями контента, и сразу же их отображать.&lt;/p&gt;
 

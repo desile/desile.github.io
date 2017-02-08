@@ -2,13 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://desile.github.io/2017/02/asteroid-game-babylonjs/</loc>
+    <lastmod>2017-02-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://desile.github.io/2017/02/hello-world/</loc>
     <lastmod>2017-02-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://desile.github.io/tags/babylonjs/</loc>
+    <lastmod>2017-02-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://desile.github.io/tags/blog/</loc>
     <lastmod>2017-02-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://desile.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://desile.github.io/tags/game/</loc>
+    <lastmod>2017-02-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -19,8 +41,14 @@
   </url>
   
   <url>
+    <loc>https://desile.github.io/tags/javascript/</loc>
+    <lastmod>2017-02-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://desile.github.io/post/</loc>
-    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -31,7 +59,13 @@
   
   <url>
     <loc>https://desile.github.io/</loc>
-    <lastmod>2017-02-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-02-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://desile.github.io/categories/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/</loc>
+    <lastmod>2017-02-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

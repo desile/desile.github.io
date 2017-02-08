@@ -2140,6 +2140,8 @@ a.fancybox {
   vertical-align: top; }
   .postShorten .postShorten-thumbnailimg {
     overflow: hidden; }
+    .postShorten .postShorten-thumbnailimg img {
+      width: 100%; }
   .postShorten .postShorten-header .postShorten-title {
     margin: 0;
     word-break: initial;
