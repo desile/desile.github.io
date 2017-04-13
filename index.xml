@@ -6,15 +6,167 @@
     <description>Recent content on Не очень личный блог</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <lastBuildDate>Mon, 06 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Apr 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://desile.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Asteroid Game (BabylonJS)</title>
-      <link>https://desile.github.io/2017/02/asteroid-game-babylonjs/</link>
+      <title>Дампы Ru.Wikipedia.Org (ИП-0)</title>
+      <link>https://desile.github.io/2017/04/%D0%B4%D0%B0%D0%BC%D0%BF%D1%8B-ru.wikipedia.org-%D0%B8%D0%BF-0/</link>
+      <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://desile.github.io/2017/04/%D0%B4%D0%B0%D0%BC%D0%BF%D1%8B-ru.wikipedia.org-%D0%B8%D0%BF-0/</guid>
+      <description>&lt;p&gt;В статье рассматривается задача обработки и подготовки дампов русской википедии (&lt;a href=&#34;http://ru.wikipedia.org/&#34;&gt;http://ru.wikipedia.org/&lt;/a&gt;) к использованию в полнотекстовом поиске, и прочее всякое, что можно сделать с крупными дампами.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Полнотекстовый поиск&lt;/strong&gt; - автоматизированный поиск документов, при котором поиск ведётся не по именам документов, а по их содержимому, всему или существенной части.Сканирование всего содержимого документов в поиске заданного слова и фразы может занимать очень большое количество времени, особенно если пространством поиска является википедия (я не говорю уже про весь интернет, где такой способ вовсе неприменим). Следовательно на основе текстовых данных, по которым будет вестись поиск, необходимо строить индекс, по которому организовывать быстрый поиск. В случае википедии текстовые данные могут быть легко получены из дампов.&lt;/p&gt;
+
+&lt;p&gt;Пока речь пойдет о том, где дампы доставать и как их готовить, - маленькая разминочная статья перед будущим циклом, в котором будут рассмотрены основы информационного поиска. На написание вдохновлен курсом &amp;ldquo;Информационного Поиска&amp;rdquo; &lt;a href=&#34;https://corp.mail.ru/ru/company/team/22/&#34;&gt;Андрея Калинина&lt;/a&gt;, хотя все конечно будет рассмотрено не так подробно, но надеюсь, что выйдет хоть и компактно, но полезно и информативно.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;добыча-дампов&#34;&gt;Добыча дампов&lt;/h2&gt;
+
+&lt;p&gt;С добычей дампов проблем никаких нет, потому что &lt;strong&gt;Вики&lt;/strong&gt; сама делится своими самыми свежими дампами.&lt;/p&gt;
+
+&lt;p&gt;Дампы доступны по ссылке &lt;a href=&#34;https://dumps.wikimedia.org/&#34;&gt;https://dumps.wikimedia.org/&lt;/a&gt; и предлагаются в различных форматах, но стоит заметить, что самые свежие это всегда &lt;strong&gt;Database backup dumps&lt;/strong&gt;, обновляются чуть ли не каждую неделю. Но если, скажем, вам не принципиальна новизна и нужны html-представления документов, то можно глянуть в &lt;strong&gt;Static HTML dumps&lt;/strong&gt;. Но мой личный совет - это чуть больше запариться, скачать дампы, а потом вытащить от туда и оформить документы в нужный формат.&lt;/p&gt;
+
+&lt;p&gt;Если выбран последний вариант, то переходим на &lt;a href=&#34;https://dumps.wikimedia.org/backup-index.html&#34;&gt;страничку бэкапов&lt;/a&gt;, жмем &lt;code&gt;Ctrl + F&lt;/code&gt; и ищем &amp;ldquo;ruwiki&amp;rdquo;. Переходим. Теперь нужно найти файл формата &lt;code&gt;ruwiki-&amp;lt;дата дампа&amp;gt;-pages-articles.xml.bz2&lt;/code&gt; , если в описании к файлу есть что-то про articles, templates и mediafile descriptors и весит он около 3GB, то скорее всего это то, что нужно. Вне архива дамп весит около 18 гигабайт, и лучше иметь на харде побольше свободного места. Сейчас это уже не кажется большим размером, но у меня реально возникла проблема с местом на виртуалке.&lt;/p&gt;
+
+&lt;p&gt;Для получения из дампов непосредственно страничек википедии в html (да и не только) представлении можно воспользоваться утилитой &lt;a href=&#34;https://github.com/attardi/wikiextractor&#34;&gt;WikiExtractor&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python3 WikiExtractor.py -o &amp;lt;output_folder&amp;gt; --html &amp;lt;dump_xml_file&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;подсчет-слов&#34;&gt;Подсчет слов&lt;/h2&gt;
+
+&lt;p&gt;Из полученных удобно-читаемых файликов можно собрать какую-нибудь статистику по документам. Вот небольшой скрипт на питоне, который соберет некоторые характеристики документов в csv-подобный формат. Скрипт обходит все файлы, сгенерированные wikiextractor&amp;rsquo;ом и производит подсчет слов, символов, заголовков, ссылок на другие страницы.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import os,re,sys
+
+output = open(&#39;stats.csv&#39;,&#39;w&#39;)
+summary = open(&#39;summary.txt&#39;,&#39;w&#39;)
+summaryWords = 0
+summarySymbols = 0
+summaryDocs = 0
+
+#regex for detect tags in html wiki docs
+htmlTagsRegex = re.compile(r&amp;quot;(&amp;amp;lt;.*?&amp;amp;gt;|&amp;lt;.*?&amp;gt;|[\.,()—;:\[\]\{\}\*\%\&amp;quot;\&#39;!?])&amp;quot;) 
+linksRegex = re.compile(r&#39;&amp;amp;lt;a href.*?&amp;amp;gt;(.*?)&amp;amp;lt;\/a&amp;amp;gt;&#39;)
+spaceRegex = re.compile(r&amp;quot;[\s\n]&amp;quot;)
+
+for directory in os.listdir(&amp;quot;out&amp;quot;):
+    dirpath = os.path.join(&amp;quot;out&amp;quot;,directory)
+    if os.path.isdir(dirpath) == True:
+        for filename in os.listdir(dirpath):
+            file = open(os.path.join(dirpath,filename))
+            # [id, title, words, symbols, h2, h3, h4, links, filename]
+            article = [] 
+            wordcount = 0
+            symbolcount = 0
+            h2count = 0
+            h3count = 0
+            h4count = 0
+            linkscount = 0
+            for line in file.readlines():
+                m = re.match(r&#39;&amp;lt;doc id=&amp;quot;(.*)&amp;quot; url=&amp;quot;(.*)&amp;quot; title=&amp;quot;(.*)&amp;quot;&amp;gt;&#39;, line)
+                if m:
+                    article.append(m.group(1)) #id
+                    article.append(m.group(3)) #title
+                elif line.startswith(&amp;quot;&amp;lt;/doc&amp;gt;&amp;quot;):
+                    summaryDocs += 1
+                    summaryWords += wordcount
+                    article.append(wordcount)
+                    summarySymbols += symbolcount
+                    article.append(symbolcount)
+                    article.append(h2count)
+                    article.append(h3count)
+                    article.append(h4count)
+                    article.append(linkscount)
+                    article.append(os.path.join(dirpath,filename))
+                    output.write(&amp;quot;|;|&amp;quot;.join(map(str,article)) + &amp;quot;\n&amp;quot;)
+                    article = []
+                    wordcount = 0
+                    symbolcount = 0
+                    h2count = 0
+                    h3count = 0
+                    h4count = 0
+                    linkscount = 0
+                else:
+                    if line.startswith(&amp;quot;&amp;lt;h2&amp;gt;&amp;quot;):
+                        h2count += 1
+                    if line.startswith(&amp;quot;&amp;lt;h3&amp;gt;&amp;quot;):
+                        h3count += 1
+                    if line.startswith(&amp;quot;&amp;lt;h4&amp;gt;&amp;quot;):
+                        h4count += 1
+                    linkscount += len(linksRegex.findall(line))
+                    rawLine = htmlTagsRegex.sub(&#39;&#39;,line) 
+                    wordcount += len(rawLine.split())
+                    rawLine = spaceRegex.sub(&#39;&#39;,rawLine)
+                    symbolcount += len(rawLine)
+        print(&#39;{} folder complete&#39;.format(directory))
+
+summary.write(&#39;Docs: {}\nWords: {}\nSymbols: {}\n&#39;.format(summaryDocs, summaryWords, summarySymbols))
+
+output.close()
+summary.close()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;На выходе получится файл с записями такого формата:
+&amp;gt;Id статьи|;|Заголовок статьи|;|Количество слов в статье|;|Количество символов в статье|;|Количество заголовков h2 в статье|;|Количество заголовков h3 в статье|;|Количество заголовков h4 в статье|;|Количество ссылок в статье|;|Путь к файлу исчтонику&lt;/p&gt;
+
+&lt;p&gt;Результат, открытый в программе Gnumeric, выглядит следующим образом:
+&lt;img src=&#34;https://desile.github.io/images/search_e/gnumeric.png&#34; alt=&#34;output.csv opened in gnumeric&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;На тот момент, когда я скачивал дамп, в русской википедии было 1370124 статьи. А самой объемной статьей - &lt;a href=&#34;https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%B6%D0%B5%D0%B9_Fairy_Tail&#34;&gt;Список персонажей Fairy Tail&lt;/a&gt; (575455 символов), что для меня было некоторым сюрпризом. Следом по объему, к слову, идет серия статей про немецкие эскадры истребителей времен второй мировой Jagdgeschwader.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;распределение&#34;&gt;Распределение&lt;/h2&gt;
+
+&lt;p&gt;Можно еще из полученного файла со статистикой посчитать распределение статей по их размеру и построить гистограмму.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+ 
+stats = []
+iter = 0
+ 
+with open(&#39;stats.csv&#39;, &#39;r&#39;) as csvfile:
+    for record in csvfile.readlines():
+        stats.append(record.split(&amp;quot;|;|&amp;quot;))
+        iter += 1
+        if(iter % 100000 == 0):
+            print(iter)
+ 
+#0 - 10000
+fig, ax = plt.subplots()
+# the histogram of the data
+n, bins, patches = ax.hist(map(lambda x: int(x[3]),stats), map(lambda x: x*100,np.arange(101)))
+
+ax.set_xlabel(&#39;Symbols in article (step 100)&#39;)
+ax.set_ylabel(&#39;Number of articles&#39;)
+plt.title(&#39;Histogram 0-10000 symbols&#39;)
+fig.tight_layout()
+plt.savefig(&#39;hist.png&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Самое большое скопление статей приходится на диапазон 300-1000 символов. Статей меньшего размера резко меньше - вероятно они не информативны, и они либо разрастаются, либо удаляются, либо представляют из себя различного рода перенаправления.
+&lt;img src=&#34;https://desile.github.io/images/search_e/symbols_histogram2.png&#34; alt=&#34;Articles histogram by articles&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Можно немного увеличить масштаб. Тенденция плавного уменьшения количества статей при росте их размера вполне ожидаема. График становится похож на логарфмически-нормальное распределение.
+&lt;img src=&#34;https://desile.github.io/images/search_e/symbols_histogram.png&#34; alt=&#34;Articles histogram by articles&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Asteroid Game на BabylonJS</title>
+      <link>https://desile.github.io/2017/02/asteroid-game-%D0%BD%D0%B0-babylonjs/</link>
       <pubDate>Mon, 06 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://desile.github.io/2017/02/asteroid-game-babylonjs/</guid>
+      <guid>https://desile.github.io/2017/02/asteroid-game-%D0%BD%D0%B0-babylonjs/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://desile.github.io/js/asteroid_game/&#34;&gt;&lt;img src=&#34;https://desile.github.io/images/asteroid_game.jpg&#34; alt=&#34;Asteroid Game Image&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;abbr title=&#34;Кликай по картинке!&#34;&gt;Простая трехмерная игра&lt;/abbr&gt;, выполненная на JavaScript с использованием библиотеки BabylonJS.&lt;/p&gt;

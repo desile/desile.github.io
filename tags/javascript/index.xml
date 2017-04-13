@@ -9,11 +9,11 @@
     <atom:link href="https://desile.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Asteroid Game (BabylonJS)</title>
-      <link>https://desile.github.io/2017/02/asteroid-game-babylonjs/</link>
+      <title>Asteroid Game на BabylonJS</title>
+      <link>https://desile.github.io/2017/02/asteroid-game-%D0%BD%D0%B0-babylonjs/</link>
       <pubDate>Mon, 06 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://desile.github.io/2017/02/asteroid-game-babylonjs/</guid>
+      <guid>https://desile.github.io/2017/02/asteroid-game-%D0%BD%D0%B0-babylonjs/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://desile.github.io/js/asteroid_game/&#34;&gt;&lt;img src=&#34;https://desile.github.io/images/asteroid_game.jpg&#34; alt=&#34;Asteroid Game Image&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;abbr title=&#34;Кликай по картинке!&#34;&gt;Простая трехмерная игра&lt;/abbr&gt;, выполненная на JavaScript с использованием библиотеки BabylonJS.&lt;/p&gt;

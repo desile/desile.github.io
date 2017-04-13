@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Программирование on Не очень личный блог</title>
-    <link>https://desile.github.io/categories/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/index.xml</link>
-    <description>Recent content in Программирование on Не очень личный блог</description>
+    <title>Информационный Поиск on Не очень личный блог</title>
+    <link>https://desile.github.io/tags/%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/index.xml</link>
+    <description>Recent content in Информационный Поиск on Не очень личный блог</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ru</language>
-    <atom:link href="https://desile.github.io/categories/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://desile.github.io/tags/%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B9-%D0%BF%D0%BE%D0%B8%D1%81%D0%BA/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Дампы Ru.Wikipedia.Org (ИП-0)</title>
@@ -158,33 +158,6 @@ plt.savefig(&#39;hist.png&#39;)
 
 &lt;p&gt;Можно немного увеличить масштаб. Тенденция плавного уменьшения количества статей при росте их размера вполне ожидаема. График становится похож на логарфмически-нормальное распределение.
 &lt;img src=&#34;https://desile.github.io/images/search_e/symbols_histogram.png&#34; alt=&#34;Articles histogram by articles&#34; /&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Asteroid Game на BabylonJS</title>
-      <link>https://desile.github.io/2017/02/asteroid-game-%D0%BD%D0%B0-babylonjs/</link>
-      <pubDate>Mon, 06 Feb 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://desile.github.io/2017/02/asteroid-game-%D0%BD%D0%B0-babylonjs/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://desile.github.io/js/asteroid_game/&#34;&gt;&lt;img src=&#34;https://desile.github.io/images/asteroid_game.jpg&#34; alt=&#34;Asteroid Game Image&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;abbr title=&#34;Кликай по картинке!&#34;&gt;Простая трехмерная игра&lt;/abbr&gt;, выполненная на JavaScript с использованием библиотеки BabylonJS.&lt;/p&gt;
-
-&lt;p&gt;Делал, чтобы посмотреть как 3D ведет себя в браузере. Ведет он себя хорошо, хоть и иногда заметно, что справляться с рендерингом сцены ему сложно. Процесс программирования сцены немного напоминает WebGL, так что тем, кто раньше имел дело с OpenGL/WebGL, подружиться с &lt;em&gt;Вавилоном&lt;/em&gt; будет сильно проще.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;p&gt;Кроме всего прочего, &lt;em&gt;Вавилон&lt;/em&gt; может служить хорошим подспорьем достаточно известной библиотеке ThreeJS, так как тоже обладает внушительным набором примеров, хорошим официальным туториалом, имеет неплохую браузерную IDE, и все больше перетекает в сторону TypeScript &lt;em&gt;(строгая типизация и нормальный ооп сильно бы упростили процесс программирования игрушек)&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;Требуется управлять космическим кораблем, уворачиваясь и уничтожая астероиды.&lt;/p&gt;
-
-&lt;p&gt;Управление кораблем:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;стандартные WASD&lt;/li&gt;
-&lt;li&gt;правой кнопкой мыши&lt;/li&gt;
-&lt;li&gt;тачпадом &lt;em&gt;(так что играть можно и с мобильных устройств, - на айпаде и redmi note 4 работает прекрасно)&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     
   </channel>
