@@ -17,39 +17,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.18.1">
-    <title>Asteroid Game на BabylonJS</title>
+    <title>Метод k-средних для обработки изображений на CUDA</title>
     <meta name="author" content="Павел Городецкий">
-    <meta name="keywords" content="javascript, game, игра, babylonjs, js, mobile, html5">
+    <meta name="keywords" content="CUDA, k-means, C, си, ImageProcessing, алгоритмы">
 
     <link rel="icon" href="https://desile.github.io/favicon.png">
     
 
     
-    <meta name="description" content="
+    <meta name="description" content="Метод k-средних - один из самых популярных и простых методов кластеризации. Метод заключается в минимизации суммарного квадратичного отклонения точек кластеров от центров этих кластеров.
 
-Простая трехмерная игра, выполненная на JavaScript с использованием библиотеки BabylonJS.
 
-Делал, чтобы посмотреть как 3D ведет себя в браузере. Ведет он себя хорошо, хоть и иногда заметно, что справляться с рендерингом сцены ему сложно. Процесс программирования сцены немного напоминает WebGL, так что тем, кто раньше имел дело с OpenGL/WebGL, подружиться с Вавилоном будет сильно проще.
+$$
+V = \sum_{i=1}^{k} \sum_{x_j \in S_i} (x_j - \mu_i)^2
+$$
+
+
+где \(k\)  — число кластеров, \(S_i\)  — полученные кластеры, \(i=1,2,&hellip;,k\)  и \(\mu_i\)  — центры масс векторов \(x_j \in S_i\) .
 
 ">
-    <meta property="og:description" content="
+    <meta property="og:description" content="Метод k-средних - один из самых популярных и простых методов кластеризации. Метод заключается в минимизации суммарного квадратичного отклонения точек кластеров от центров этих кластеров.
 
-Простая трехмерная игра, выполненная на JavaScript с использованием библиотеки BabylonJS.
 
-Делал, чтобы посмотреть как 3D ведет себя в браузере. Ведет он себя хорошо, хоть и иногда заметно, что справляться с рендерингом сцены ему сложно. Процесс программирования сцены немного напоминает WebGL, так что тем, кто раньше имел дело с OpenGL/WebGL, подружиться с Вавилоном будет сильно проще.
+$$
+V = \sum_{i=1}^{k} \sum_{x_j \in S_i} (x_j - \mu_i)^2
+$$
+
+
+где \(k\)  — число кластеров, \(S_i\)  — полученные кластеры, \(i=1,2,&hellip;,k\)  и \(\mu_i\)  — центры масс векторов \(x_j \in S_i\) .
 
 ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Asteroid Game на BabylonJS">
-    <meta property="og:url" content="/2017/02/asteroid-game-%D0%BD%D0%B0-babylonjs/">
+    <meta property="og:title" content="Метод k-средних для обработки изображений на CUDA">
+    <meta property="og:url" content="/2017/04/%D0%BC%D0%B5%D1%82%D0%BE%D0%B4-k-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D1%85-%D0%B4%D0%BB%D1%8F-%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BD%D0%B0-cuda/">
     <meta property="og:site_name" content="Не очень личный блог">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Не очень личный блог">
-    <meta name="twitter:description" content="
+    <meta name="twitter:description" content="Метод k-средних - один из самых популярных и простых методов кластеризации. Метод заключается в минимизации суммарного квадратичного отклонения точек кластеров от центров этих кластеров.
 
-Простая трехмерная игра, выполненная на JavaScript с использованием библиотеки BabylonJS.
 
-Делал, чтобы посмотреть как 3D ведет себя в браузере. Ведет он себя хорошо, хоть и иногда заметно, что справляться с рендерингом сцены ему сложно. Процесс программирования сцены немного напоминает WebGL, так что тем, кто раньше имел дело с OpenGL/WebGL, подружиться с Вавилоном будет сильно проще.
+$$
+V = \sum_{i=1}^{k} \sum_{x_j \in S_i} (x_j - \mu_i)^2
+$$
+
+
+где \(k\)  — число кластеров, \(S_i\)  — полученные кластеры, \(i=1,2,&hellip;,k\)  и \(\mu_i\)  — центры масс векторов \(x_j \in S_i\) .
 
 ">
     
@@ -63,6 +75,8 @@
     
 
     
+    
+      <meta property="og:image" content="https://desile.github.io/images/kmeans-cude/title.png">
     
     
 
@@ -217,28 +231,26 @@
 </nav>
 
       
-
-      <div id="main" data-behavior="5"
-        class="
-               hasCoverMetaIn
-               ">
-        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
-          
-          
-            <div class="post-header main-content-wrap text-left">
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('/images/kmeans-cude/title.png')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Asteroid Game на BabylonJS
+      Метод k-средних для обработки изображений на CUDA
     </h1>
   
   <div class="postShorten-meta post-meta">
-  <time itemprop="datePublished" datetime="2017-02-06T00:00:00Z">
+  <time itemprop="datePublished" datetime="2017-04-20T00:00:00Z">
     
   
   
   
   
-    6 Февраль 2017
+    20 Апрель 2017
   
 
   </time>
@@ -255,28 +267,432 @@
 </div>
 
 </div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p><a href="https://desile.github.io/js/asteroid_game/"><img src="https://desile.github.io/images/asteroid_game.jpg" alt="Asteroid Game Image" /></a></p>
+              <p>Метод k-средних - один из самых популярных и простых методов кластеризации. Метод заключается в минимизации суммарного квадратичного отклонения точек кластеров от центров этих кластеров.</p>
 
-<p><abbr title="Кликай по картинке!">Простая трехмерная игра</abbr>, выполненная на JavaScript с использованием библиотеки BabylonJS.</p>
+<p>
+$$
+V = \sum_{i=1}^{k} \sum_{x_j \in S_i} (x_j - \mu_i)^2
+$$
+</p>
 
-<p>Делал, чтобы посмотреть как 3D ведет себя в браузере. Ведет он себя хорошо, хоть и иногда заметно, что справляться с рендерингом сцены ему сложно. Процесс программирования сцены немного напоминает WebGL, так что тем, кто раньше имел дело с OpenGL/WebGL, подружиться с <em>Вавилоном</em> будет сильно проще.</p>
+<p>где \(k\)  — число кластеров, \(S_i\)  — полученные кластеры, \(i=1,2,&hellip;,k\)  и \(\mu_i\)  — центры масс векторов \(x_j \in S_i\) .</p>
 
 <p></p>
 
-<p>Кроме всего прочего, <em>Вавилон</em> может служить хорошим подспорьем достаточно известной библиотеке ThreeJS, так как тоже обладает внушительным набором примеров, хорошим официальным туториалом, имеет неплохую браузерную IDE, и все больше перетекает в сторону TypeScript <em>(строгая типизация и нормальный ооп сильно бы упростили процесс программирования игрушек)</em>.</p>
+<blockquote>
+<p>Работу этого метода замечательно демонстрирует эта картинка:
+<img src="https://desile.github.io/images/kmeans-cude/kmeans.png" alt="Kmeans algorithm" /></p>
 
-<p>Требуется управлять космическим кораблем, уворачиваясь и уничтожая астероиды.</p>
+<ol>
+<li>Определяется количество кластеров и выбираются случайные начальные позиции центров кластеров.</li>
+<li>Для каждой точки определяется ближайшая позиция центра кластера.</li>
+<li>Вычисляются центроиды - центры тяжести кластеров.</li>
+<li>Центры кластеров перемещаются к центроидам.</li>
+<li>Возвращаемся к п. 2</li>
+</ol>
+</blockquote>
 
-<p>Управление кораблем:</p>
+<p>В случае задачи обработки изображения пространством будет трехмерное пространство цветов - RGB. Поэтому точками кластеров будут являться цвета - точки пространства RGB, например (196,0,171) <span style="color:#C400AB">пурпурный цвет</span>.</p>
 
-<ul>
-<li>стандартные WASD</li>
-<li>правой кнопкой мыши</li>
-<li>тачпадом <em>(так что играть можно и с мобильных устройств, - на айпаде и redmi note 4 работает прекрасно)</em></li>
-</ul>
+<p>Такая задача является одной из наглядных демонстраций метода k-средних, а так же очень хорошо распараллеливается, поэтому можно решить эту задачу средствами CUDA.</p>
+
+<p>Для начала нужно представить изображение в виде следующей бинарной структуры:
+<img src="https://desile.github.io/images/kmeans-cude/binary-pic.png" alt="Binary Pic Presentation" />
+Это можно сделать готовой утилитой или добавить конвертацию непосредственно в программу кластеризации.</p>
+
+<blockquote>
+<p><strong>Алгоритм решения примерно следующий:</strong></p>
+
+<p>Доступ к константной памяти достаточно быстрый, за счет использования
+кэша, но большими объемами она не располагает, поэтому в ней имеет
+смысл хранить лишь небольшое количество часто используемых данных. Мы
+имеем возможность записывать в нее данные с хоста, но при этом в
+пределах GPU, как и следует из названия, данные мы изменять не можем,
+и они доступны нам только для чтения.</p>
+
+<p>Таким образом, константная память хорошо подходит для использования в
+алгоритме kMeans - для хранения центров кластеров, так как обращений к
+ним происходит достаточно много, а изменяем мы их уже на CPU. Поэтому
+копируем значения центров кластеров в константную память.</p>
+
+<p>В ядре параллельно находим ближайшие кластеры для каждого пикселя.
+Если для пикселя изменился ближайший кластер, то ставим на пиксель
+метку о том, что необходимо продолжать итеративный процесс.</p>
+
+<p>Далее на CPU обходим все пиксели, проверяя наличие меток, и вычисляя
+новые центры кластеров. Так как для каждого пикселя уже известен номер
+кластера, то находим усредненное значение всего кластера – новый
+центр. Если при обходе нам не встретилась ни одна метка, то это
+значит, что центры кластеров стабилизировались и можно завершать
+процесс.</p>
+</blockquote>
+
+<p>У меня завалялась картинка одной модели SuicideGirls ( ͡° ͜ʖ ͡°) Возьмем ее:
+
+ 
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-100" >
+  
+    <a class="fancybox" href="https://desile.github.io/images/kmeans-cude/suicide.jpg" title="Оригинал изображения" data-fancybox-group="">
+  
+    <img class="fig-img" src="https://desile.github.io/images/kmeans-cude/suicide.jpg"  alt="Оригинал изображения">
+  
+    </a>
+  
+   
+    <span class="caption">Оригинал изображения</span>
+  
+</div>
+
+  <div style="clear:both;"></div>
+</p>
+
+<p>Попробуем задать два кластера и обработать картинку. Два кластера - означают два усредненных цвета. Пиксели картинки прибиваются к одному из кластеров и перекрашиваются в усредненный цвет. Для двух кластеров алгоритм очень точно выделил кожу модели:
+
+ 
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+  
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-100" >
+  
+    <a class="fancybox" href="https://desile.github.io/images/kmeans-cude/suic2.png" title="2 кластера" data-fancybox-group="">
+  
+    <img class="fig-img" src="https://desile.github.io/images/kmeans-cude/suic2.png"  alt="2 кластера">
+  
+    </a>
+  
+   
+    <span class="caption">2 кластера</span>
+  
+</div>
+
+  <div style="clear:both;"></div>
+</p>
+
+<p>Пять, десять и тридцать кластеров соответственно:
+
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-33" >
+  
+    <a class="fancybox" href="https://desile.github.io/images/kmeans-cude/suic5.png" title="5 кластеров" data-fancybox-group="">
+  
+    <img class="fig-img" src="https://desile.github.io/images/kmeans-cude/suic5.png"  alt="5 кластеров">
+  
+    </a>
+  
+   
+    <span class="caption">5 кластеров</span>
+  
+</div>
+
+
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-33" >
+  
+    <a class="fancybox" href="https://desile.github.io/images/kmeans-cude/suic10.png" title="10 кластеров" data-fancybox-group="">
+  
+    <img class="fig-img" src="https://desile.github.io/images/kmeans-cude/suic10.png"  alt="10 кластеров">
+  
+    </a>
+  
+   
+    <span class="caption">10 кластеров</span>
+  
+</div>
+
+
+
+ 
+  
+  
+  
+  
+    
+  
+    
+      
+    
+  
+
+<div class="figure fig-33" >
+  
+    <a class="fancybox" href="https://desile.github.io/images/kmeans-cude/suic30.png" title="30 кластеров" data-fancybox-group="">
+  
+    <img class="fig-img" src="https://desile.github.io/images/kmeans-cude/suic30.png"  alt="30 кластеров">
+  
+    </a>
+  
+   
+    <span class="caption">30 кластеров</span>
+  
+</div>
+</p>
+
+<p>Код решения на C\CUDA</p>
+
+<pre><code>#include &quot;cuda_runtime.h&quot;
+#include &quot;device_launch_parameters.h&quot;
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+#define BLOCK_SIZE 1024
+
+#define MAX_GRID_SIZE 40000
+#define SIZE_FILE_NAME 255
+#define MAX_CLUSTERS 32
+
+typedef unsigned char uchar;
+
+__constant__ double3 centersDevice[MAX_CLUSTERS];
+
+
+__device__ double euclideanDistance(uchar4 vec1, double3 vec2){
+	return pow((double)(vec1.x - vec2.x), 2) + pow((double)(vec1.y - vec2.y), 2) + pow((double)(vec1.z - vec2.z),2);
+}
+
+__global__ void kMeans(uchar4* src, int nc, int size){
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	int offset = gridDim.x * blockDim.x;
+
+	for (int i = index; i &lt; size; i += offset){
+
+		double min = euclideanDistance(src[i], centersDevice[0]);
+		int clusterNumber = 0;
+		for (int k = 1; k &lt; nc; k++){
+			double curDst = euclideanDistance(src[i], centersDevice[k]);
+			if (curDst &lt; min){
+				min = curDst;
+				clusterNumber = k;
+			}
+		}
+
+		if (src[i].w != clusterNumber){
+			src[i].w = clusterNumber + MAX_CLUSTERS;
+		}
+		else {
+			src[i].w = clusterNumber;
+		}
+	}
+}
+
+
+char* getline() {
+	char * line = (char*)malloc(SIZE_FILE_NAME);
+	char * linep = line;
+	int c;
+
+	for (;;) {
+		c = fgetc(stdin);
+		if (c == EOF)
+			break;
+		if (c == '\n')
+			break;
+		*line++ = c;
+	}
+	*line++ = '\0';
+	return linep;
+}
+
+int main()
+{
+	cudaEvent_t start, stop;
+	cudaEventCreate(&amp;start);
+	cudaEventCreate(&amp;stop);
+
+
+	char* inputFileName = getline();
+	char* outputFileName = getline();
+
+	int nc;
+	scanf(&quot;%d&quot;, &amp;nc);
+	int2 clusters[MAX_CLUSTERS];
+	
+
+	double3 centers[MAX_CLUSTERS];
+
+	int w, h;
+	FILE *in = fopen(inputFileName, &quot;rb&quot;);
+	fread(&amp;w, sizeof(int), 1, in);
+	fread(&amp;h, sizeof(int), 1, in);
+	int srcMem = sizeof(uchar4)* w * h;
+	uchar4 *src = (uchar4*)malloc(srcMem);
+	fread(src, sizeof(uchar4), w * h, in);
+
+
+	cudaEventRecord(start);
+
+	
+	for (int i = 0; i &lt; nc; i++){
+		centers[i].x = 255/nc * i;
+		centers[i].y = 255/nc * i;
+		centers[i].z = 255/nc * i;
+	}
+	
+
+	uchar4 *srcDevice;
+	cudaMalloc((void**)&amp;srcDevice, srcMem);
+
+	int iterations = 0;
+	int clusterNumber;
+
+	bool end = false;
+
+	while (!end){
+		end = true;
+
+		iterations++;
+
+		cudaMemcpy(srcDevice, src, srcMem, cudaMemcpyHostToDevice);
+		cudaMemcpyToSymbol(centersDevice, centers, MAX_CLUSTERS * sizeof(double3));
+		kMeans &lt;&lt;&lt; min((int)ceil((double)w*h / (double)BLOCK_SIZE), MAX_GRID_SIZE), BLOCK_SIZE &gt;&gt; &gt; (srcDevice, nc, w*h);
+		cudaMemcpy(src, srcDevice, srcMem, cudaMemcpyDeviceToHost);
+		cudaMemcpyFromSymbol(centers, centersDevice, sizeof(double3)* MAX_CLUSTERS);
+
+		double sumR[MAX_CLUSTERS];
+		double sumG[MAX_CLUSTERS];
+		double sumB[MAX_CLUSTERS];
+		double size[MAX_CLUSTERS];
+		for (int i = 0; i &lt; nc; i++){
+			sumR[i] = 0;
+			sumG[i] = 0;
+			sumB[i] = 0;
+			size[i] = 0;
+		}
+
+		for (int i = 0; i &lt; h; i++){
+			for (int j = 0; j &lt; w; j++){
+				if (src[i*w + j].w &gt;= MAX_CLUSTERS){
+					end = false;
+					src[i*w + j].w -= MAX_CLUSTERS;
+				}
+				clusterNumber = src[i*w + j].w;
+				size[clusterNumber] += 1;
+				sumR[clusterNumber] += src[i*w + j].x;
+				sumG[clusterNumber] += src[i*w + j].y;
+				sumB[clusterNumber] += src[i*w + j].z;
+			}
+
+
+			for (int i = 0; i &lt; nc; i++){
+				centers[i].x = sumR[i] / size[i];
+				centers[i].y = sumG[i] / size[i];
+				centers[i].z = sumB[i] / size[i];
+			}
+		}
+
+	}
+
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	float milliseconds = 0;
+	cudaEventElapsedTime(&amp;milliseconds, start, stop);
+	printf(&quot;Time: %f ms\n&quot;, milliseconds);
+	printf(&quot;Iterations: %d\n&quot;, iterations);
+
+	for (int i = 0; i &lt; h; i++){
+		for (int j = 0; j &lt; w; j++){
+			src[i*w + j].x = ceil(centers[src[i*w + j].w].x);
+			src[i*w + j].y = ceil(centers[src[i*w + j].w].y);
+			src[i*w + j].z = ceil(centers[src[i*w + j].w].z);
+		}
+	}
+
+
+	FILE *out = fopen(outputFileName, &quot;wb&quot;);
+	fwrite(&amp;w, sizeof(int), 1, out);
+	fwrite(&amp;h, sizeof(int), 1, out);
+	fwrite(src, sizeof(uchar4), h*w, out);
+}
+</code></pre>
               
             </div>
           </div>
@@ -288,11 +704,11 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">Теги: </span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/game/">Game</a>
+  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/cuda/">CUDA</a>
 
-  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/javascript/">JavaScript</a>
+  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B/">Алгоритмы</a>
 
-  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/babylonjs/">BabylonJS</a>
+  <a class="tag tag--primary tag--small" href="https://desile.github.io//tags/c/">C</a>
 
                   </div>
                 
@@ -304,7 +720,7 @@
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/2017/04/%D0%B4%D0%B0%D0%BC%D0%BF%D1%8B-ru.wikipedia.org-%D0%B8%D0%BF-0/" data-tooltip="Дампы Ru.Wikipedia.Org (ИП-0)">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">Пред.</span>
@@ -312,7 +728,7 @@
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/2017/02/hello-world/" data-tooltip="Hello, World!">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/2017/04/%D0%B4%D0%B0%D0%BC%D0%BF%D1%8B-ru.wikipedia.org-%D0%B8%D0%BF-0/" data-tooltip="Дампы Ru.Wikipedia.Org (ИП-0)">
           
             <span class="hide-xs hide-sm text-small icon-mr">След.</span>
             <i class="fa fa-angle-right"></i>
@@ -329,17 +745,17 @@
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -394,7 +810,7 @@ VK.Widgets.Comments("vk_comments", {limit: 20, width: "600" , attach: false});
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/2017/04/%D0%B4%D0%B0%D0%BC%D0%BF%D1%8B-ru.wikipedia.org-%D0%B8%D0%BF-0/" data-tooltip="Дампы Ru.Wikipedia.Org (ИП-0)">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">Пред.</span>
@@ -402,7 +818,7 @@ VK.Widgets.Comments("vk_comments", {limit: 20, width: "600" , attach: false});
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/2017/02/hello-world/" data-tooltip="Hello, World!">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://desile.github.io/2017/04/%D0%B4%D0%B0%D0%BC%D0%BF%D1%8B-ru.wikipedia.org-%D0%B8%D0%BF-0/" data-tooltip="Дампы Ru.Wikipedia.Org (ИП-0)">
           
             <span class="hide-xs hide-sm text-small icon-mr">След.</span>
             <i class="fa fa-angle-right"></i>
@@ -419,17 +835,17 @@ VK.Widgets.Comments("vk_comments", {limit: 20, width: "600" , attach: false});
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -456,17 +872,17 @@ VK.Widgets.Comments("vk_comments", {limit: 20, width: "600" , attach: false});
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
         <i class="fa fa-google-plus"></i><span>Поделиться в Google Plus</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
         <i class="fa fa-facebook-official"></i><span>Поделиться в Facebook</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f02%2fasteroid-game-%25D0%25BD%25D0%25B0-babylonjs%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdesile.github.io%2f2017%2f04%2f%25D0%25BC%25D0%25B5%25D1%2582%25D0%25BE%25D0%25B4-k-%25D1%2581%25D1%2580%25D0%25B5%25D0%25B4%25D0%25BD%25D0%25B8%25D1%2585-%25D0%25B4%25D0%25BB%25D1%258F-%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B1%25D0%25BE%25D1%2582%25D0%25BA%25D0%25B8-%25D0%25B8%25D0%25B7%25D0%25BE%25D0%25B1%25D1%2580%25D0%25B0%25D0%25B6%25D0%25B5%25D0%25BD%25D0%25B8%25D0%25B9-%25D0%25BD%25D0%25B0-cuda%2f">
         <i class="fa fa-twitter"></i><span>Поделиться в Twitter</span>
       </a>
     </li>
@@ -680,9 +1096,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/desile.github.io\/2017\/02\/asteroid-game-%D0%BD%D0%B0-babylonjs\/';
+          this.page.url = 'https:\/\/desile.github.io\/2017\/04\/%D0%BC%D0%B5%D1%82%D0%BE%D0%B4-k-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D1%85-%D0%B4%D0%BB%D1%8F-%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BD%D0%B0-cuda\/';
           
-            this.page.identifier = '\/2017\/02\/asteroid-game-%D0%BD%D0%B0-babylonjs\/'
+            this.page.identifier = '\/2017\/04\/%D0%BC%D0%B5%D1%82%D0%BE%D0%B4-k-%D1%81%D1%80%D0%B5%D0%B4%D0%BD%D0%B8%D1%85-%D0%B4%D0%BB%D1%8F-%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BD%D0%B0-cuda\/'
           
         };
         (function() {
