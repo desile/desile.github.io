@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточный Пьяница</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>🃏 Карточный Пьяница</h1>
+        
+        <div class="scoreboard">
+            <div class="player-score player1-score">
+                <span class="player-name">Игрок</span>
+                <span class="card-count" id="player-cards">0</span>
+                <span class="card-label">карт</span>
+            </div>
+            <div class="vs">VS</div>
+            <div class="player-score player2-score">
+                <span class="player-name">Компьютер</span>
+                <span class="card-count" id="computer-cards">0</span>
+                <span class="card-label">карт</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="deck-area player-deck">
+                <div class="deck" id="player-deck">
+                    <div class="card card-back"></div>
+                </div>
+                <span class="deck-label">Ваша колода</span>
+            </div>
+
+            <div class="battle-area">
+                <div class="played-cards">
+                    <div class="played-card-slot" id="player-played">
+                        <div class="card placeholder"></div>
+                    </div>
+                    <div class="war-pile" id="war-pile"></div>
+                    <div class="played-card-slot" id="computer-played">
+                        <div class="card placeholder"></div>
+                    </div>
+                </div>
+                <div class="battle-message" id="battle-message">Нажмите "Играть" чтобы начать!</div>
+            </div>
+
+            <div class="deck-area computer-deck">
+                <div class="deck" id="computer-deck">
+                    <div class="card card-back"></div>
+                </div>
+                <span class="deck-label">Колода компьютера</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="play-btn">▶️ Играть</button>
+            <button class="btn btn-secondary" id="auto-btn">⚡ Авто-игра</button>
+            <button class="btn btn-danger" id="restart-btn">🔄 Новая игра</button>
+        </div>
+
+        <div class="rules">
+            <h3>📜 Правила игры</h3>
+            <p>Колода из 36 карт делится поровну. Каждый ход игроки открывают верхнюю карту. 
+            У кого карта старше — забирает обе. При равенстве карт происходит "война": 
+            кладутся по одной карте рубашкой вверх и по одной открытой. 
+            Побеждает тот, кто соберёт все карты!</p>
+        </div>
+    </div>
+
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 id="winner-text">Игра окончена!</h2>
+            <p id="winner-message"></p>
+            <button class="btn btn-primary" id="new-game-btn">Новая игра</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
