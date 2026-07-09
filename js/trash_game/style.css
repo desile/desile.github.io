@@ -1,0 +1,591 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, sans-serif;
+    font-size: 11px;
+    overflow: hidden;
+    user-select: none;
+}
+
+.desktop {
+    width: 100vw;
+    height: 100vh;
+    background: #008080;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Windows 95 3D Border Effect */
+.win95-border {
+    border: 2px solid;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+}
+
+.win95-border-inset {
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+}
+
+/* Taskbar */
+.taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    background: #c0c0c0;
+    border-top: 2px solid #dfdfdf;
+    display: flex;
+    align-items: center;
+    padding: 2px 2px;
+    z-index: 1000;
+}
+
+.start-button {
+    height: 22px;
+    padding: 0 6px;
+    font-size: 11px;
+    font-weight: bold;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.start-button:active {
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+}
+
+.start-logo {
+    font-size: 14px;
+}
+
+.taskbar-items {
+    flex: 1;
+    display: flex;
+    padding: 0 4px;
+    gap: 2px;
+}
+
+.taskbar-item {
+    height: 22px;
+    padding: 0 8px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    min-width: 150px;
+}
+
+.taskbar-item.active {
+    background: #ffffff;
+}
+
+.system-tray {
+    height: 22px;
+    padding: 0 8px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    display: flex;
+    align-items: center;
+}
+
+.time {
+    font-size: 11px;
+}
+
+/* Window */
+.window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 520px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    box-shadow: 2px 2px 0 #000;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-bar {
+    height: 18px;
+    background: linear-gradient(90deg, #000080, #1084d0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2px;
+}
+
+.title-bar-text {
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding-left: 2px;
+}
+
+.title-bar-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.title-bar-btn {
+    width: 16px;
+    height: 14px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    font-size: 10px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-bar-btn:active {
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+}
+
+.menu-bar {
+    height: 20px;
+    background: #c0c0c0;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    border-bottom: 1px solid #808080;
+}
+
+.menu-item {
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: #000080;
+    color: white;
+}
+
+.window-content {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.status-bar {
+    height: 20px;
+    background: #c0c0c0;
+    border-top: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    padding: 2px 4px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+}
+
+/* Game Stats */
+.game-stats {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.stat-box {
+    background: #fff;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    padding: 4px 12px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: #808080;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+}
+
+/* Game Area */
+.game-area {
+    flex: 1;
+    background: #fff;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    position: relative;
+    overflow: hidden;
+}
+
+.recycle-bin {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    width: 80px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.recycle-bin.highlight {
+    transform: scale(1.2);
+}
+
+.recycle-bin.success {
+    animation: binShake 0.3s ease;
+}
+
+@keyframes binShake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+.bin-icon {
+    font-size: 48px;
+    filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.3));
+}
+
+.bin-label {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.throw-zone {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background: linear-gradient(to top, #c0c0c0, #e0e0e0);
+    border-top: 2px solid #808080;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.icon-tray {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.draggable-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: transform 0.1s;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid transparent;
+    padding: 4px;
+}
+
+.draggable-icon:hover {
+    background: #000080;
+    border: 1px dotted #fff;
+}
+
+.draggable-icon:hover .icon-label {
+    color: #fff;
+}
+
+.draggable-icon:active {
+    cursor: grabbing;
+}
+
+.draggable-icon.dragging {
+    position: fixed;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+.icon-img {
+    font-size: 32px;
+    filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.3));
+}
+
+.icon-label {
+    font-size: 10px;
+    text-align: center;
+    margin-top: 2px;
+    color: #000;
+}
+
+.instructions {
+    font-size: 11px;
+    color: #808080;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Flying Icon */
+.flying-icon {
+    position: fixed;
+    z-index: 1500;
+    pointer-events: none;
+    transition: none;
+}
+
+.flying-icon .icon-img {
+    font-size: 32px;
+}
+
+/* Power Indicator */
+.power-indicator {
+    position: absolute;
+    bottom: 150px;
+    left: 20px;
+    width: 20px;
+    height: 150px;
+    background: #fff;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    display: none;
+}
+
+.power-indicator.active {
+    display: block;
+}
+
+.power-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0%;
+    background: linear-gradient(to top, #00ff00, #ffff00, #ff0000);
+    transition: height 0.05s;
+}
+
+/* Control Panel */
+.control-panel {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.win95-btn {
+    padding: 4px 16px;
+    font-size: 11px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    cursor: pointer;
+}
+
+.win95-btn:active {
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+}
+
+.win95-btn:focus {
+    outline: 1px dotted #000;
+    outline-offset: -4px;
+}
+
+/* Score Popup */
+.popup {
+    position: fixed;
+    z-index: 3000;
+    pointer-events: none;
+    display: none;
+}
+
+.popup.show {
+    display: block;
+    animation: popupAnim 1s ease forwards;
+}
+
+@keyframes popupAnim {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-icon {
+    font-size: 24px;
+}
+
+.popup-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #008000;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+.popup-text.miss {
+    color: #ff0000;
+}
+
+/* Dialog */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+}
+
+.dialog-overlay.show {
+    display: flex;
+}
+
+.dialog {
+    width: 300px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    box-shadow: 4px 4px 0 #000;
+}
+
+.dialog-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.dialog-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.dialog-message {
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.dialog-message p {
+    margin: 5px 0;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Desktop Icons */
+.desktop-icon {
+    position: absolute;
+    width: 70px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.desktop-icon:hover {
+    background: rgba(0, 0, 128, 0.3);
+}
+
+.desktop-icon-img {
+    font-size: 32px;
+    filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.5));
+}
+
+.desktop-icon-label {
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* Animations */
+@keyframes iconFly {
+    to {
+        transform: translate(var(--end-x), var(--end-y));
+    }
+}
+
+/* Trail effect */
+.trail {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 128, 0.3);
+    pointer-events: none;
+    z-index: 1400;
+    animation: trailFade 0.3s ease forwards;
+}
+
+@keyframes trailFade {
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 750px) {
+    .window {
+        width: 95vw;
+        height: 80vh;
+        top: 45%;
+    }
+    
+    .game-stats {
+        flex-wrap: wrap;
+    }
+    
+    .stat-box {
+        min-width: 70px;
+        padding: 2px 8px;
+    }
+    
+    .stat-value {
+        font-size: 14px;
+    }
+    
+    .desktop-icon {
+        display: none;
+    }
+}
