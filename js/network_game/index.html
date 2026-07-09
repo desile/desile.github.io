@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Router - Симулятор сетей</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="header">
+            <h1>🌐 Network Router</h1>
+            <p class="subtitle">Интерактивный симулятор маршрутизации</p>
+        </header>
+
+        <div class="top-bar">
+            <div class="level-info">
+                <span class="level-label">Уровень:</span>
+                <span class="level-value" id="level">1</span>
+                <span class="level-name" id="level-name">Основы маршрутизации</span>
+            </div>
+            <div class="score-info">
+                <span>⭐ Очки: <strong id="score">0</strong></span>
+                <span>✅ Доставлено: <strong id="delivered">0</strong></span>
+                <span>❌ Потеряно: <strong id="lost">0</strong></span>
+            </div>
+        </div>
+
+        <div class="main-area">
+            <div class="network-canvas" id="network-canvas">
+                <svg id="connections-svg"></svg>
+                <div id="nodes-container"></div>
+                <div id="packets-container"></div>
+            </div>
+
+            <div class="sidebar">
+                <div class="panel task-panel">
+                    <h3>📋 Задание</h3>
+                    <div class="task-content" id="task-content">
+                        Загрузка...
+                    </div>
+                </div>
+
+                <div class="panel routing-panel">
+                    <h3>🔀 Правила маршрутизации</h3>
+                    <div class="routing-rules" id="routing-rules">
+                        <div class="rule-hint">Выберите роутер для настройки</div>
+                    </div>
+                    <button class="btn btn-add-rule" id="add-rule-btn" disabled>+ Добавить правило</button>
+                </div>
+
+                <div class="panel info-panel">
+                    <h3>📖 Справка</h3>
+                    <div class="info-content" id="info-content">
+                        <p><strong>IP-адрес</strong> — уникальный идентификатор устройства в сети.</p>
+                        <p><strong>Порт</strong> — номер для идентификации приложения (80 = HTTP, 443 = HTTPS, 22 = SSH).</p>
+                        <p><strong>Роутер</strong> — направляет пакеты между сетями по правилам маршрутизации.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="send-packet-btn">📤 Отправить запрос</button>
+            <button class="btn btn-secondary" id="auto-send-btn">⚡ Авто-режим</button>
+            <button class="btn btn-warning" id="reset-level-btn">🔄 Сбросить уровень</button>
+            <button class="btn btn-info" id="next-level-btn" disabled>➡️ Следующий уровень</button>
+        </div>
+    </div>
+
+    <!-- Rule Editor Modal -->
+    <div class="modal" id="rule-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Настройка правила маршрутизации</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Условие (если назначение):</label>
+                    <select id="rule-destination">
+                        <option value="*">Любой адрес (*)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Порт назначения:</label>
+                    <select id="rule-port">
+                        <option value="*">Любой порт (*)</option>
+                        <option value="80">80 (HTTP)</option>
+                        <option value="443">443 (HTTPS)</option>
+                        <option value="22">22 (SSH)</option>
+                        <option value="3306">3306 (MySQL)</option>
+                        <option value="5432">5432 (PostgreSQL)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Направить на:</label>
+                    <select id="rule-next-hop">
+                        <option value="">Выберите...</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" id="save-rule-btn">Сохранить</button>
+                    <button class="btn btn-danger" id="delete-rule-btn">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Complete Modal -->
+    <div class="modal" id="complete-modal">
+        <div class="modal-content modal-success">
+            <div class="modal-header">
+                <h3>🎉 Уровень пройден!</h3>
+            </div>
+            <div class="modal-body">
+                <div class="complete-stats">
+                    <p>Доставлено пакетов: <strong id="complete-delivered">0</strong></p>
+                    <p>Потеряно пакетов: <strong id="complete-lost">0</strong></p>
+                    <p>Бонус за точность: <strong id="complete-bonus">0</strong></p>
+                    <p class="total-score">Итого очков: <strong id="complete-score">0</strong></p>
+                </div>
+                <div class="complete-lesson" id="complete-lesson">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="next-level-modal-btn">Следующий уровень</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Packet Info Tooltip -->
+    <div class="tooltip" id="packet-tooltip">
+        <div class="tooltip-content"></div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
